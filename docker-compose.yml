@@ -1,0 +1,14 @@
+version: "3.4"
+
+services:
+  
+  audit-postgres:
+    image: postgres:9.5.25-alpine
+    environment:
+      - POSTGRES_DB=JournalDb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"

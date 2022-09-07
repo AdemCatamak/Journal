@@ -1,0 +1,9 @@
+﻿{
+  "profiles": {
+    "Journal.Api": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false
+    }
+  }
+}

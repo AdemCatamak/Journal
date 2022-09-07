@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Journal.Api";
+
+package audit;
+
+service AuditGrpcService {
+  rpc CreateAuditLogs (CreateAuditLogCollectionRequest) returns (google.protobuf.Empty);
+  rpc QueryAuditLogs (QueryAuditLogCollectionRequest) returns (stream QueryAuditLogResponse);
+}
+
+message CreateAuditLogRequest {
+  string ServerName = 1;
+  string DbName = 2;
+  string TableName = 3;
+  string RowId = 4;
+  string ColumnName = 5;
+  string OldValue = 6;
+  string NewValue = 7;
+  string ExecutedBy = 8;
+  google.protobuf.Timestamp ExecutedOn = 9;
+}
+
+message CreateAuditLogCollectionRequest {
+  repeated CreateAuditLogRequest AuditLogs = 1;
+}
+
+message QueryAuditLogCollectionRequest{
+  string ServerName = 1;
+  string DbName = 2;
+  google.protobuf.StringValue TableName = 3;
+  google.protobuf.StringValue RowId = 4;
+  google.protobuf.StringValue ColumnName = 5;
+  int64 AfterId = 6;
+  google.protobuf.Int32Value Take = 7;
+}
+
+message QueryAuditLogResponse{
+  int64 Id = 1;
+  string ServerName = 2;
+  string DbName = 3;
+  string TableName = 4;
+  string RowId = 5;
+  string ColumnName = 6;
+  string OldValue = 7;
+  string NewValue = 8;
+  string ExecutedBy = 9;
+  google.protobuf.Timestamp ExecutedOn = 10;
+  google.protobuf.Timestamp CreatedOn = 11;
+}
